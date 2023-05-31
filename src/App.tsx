@@ -2,20 +2,24 @@ import React from 'react';
 import './App.css';
 import {Accordion} from "./Components/Accordion/Accordion";
 import {Rating} from "./Components/Raiting/Raiting";
+import {OnOff} from "./Components/OnOff/OnOff";
 
 
 const App = () => {
     //debugger
     return (
         <div>
+           <OnOff state={false}/>
+
+
+
             <PageTitle title={"This is APP component"}/>
-            <PageTitle title={"Users frend"}/>
+            <PageTitle title={"Users friend"}/>
             <div>Articl1</div>
             <Rating value={3}/>
+            <Accordion title={"Menu1"} collaps={true}/>
             <Accordion title={"Menu2"} collaps={false}/>
-            <Accordion title={"Menu2"} collaps={true}/>
             Articl2
-            <Rating value={0}/>
             <Rating value={1}/>
             <Rating value={2}/>
             <Rating value={3}/>
@@ -30,7 +34,7 @@ type PageTitlePropsType = {
     title: string
 }
 
-const PageTitle = (props: PageTitlePropsType)=>{
-   return <h1>{props.title}</h1>
+const PageTitle = (props: PageTitlePropsType) => {
+    return <h1>{props.title}</h1>
 }
 export default App;
