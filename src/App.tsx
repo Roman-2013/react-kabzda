@@ -10,7 +10,7 @@ import {UncontroletRating} from './Components/UncontroletRaiting/UncontroletRati
 const App = () => {
     //debugger
     return (
-        <div>
+        <div className={'App'}>
            <OnOff on={false}/>
            {/*<OnOff on={true}/>*/}
            {/*<OnOff on={false}/>*/}
