@@ -6,75 +6,53 @@ import React, {useState} from 'react';
 
 export function UncontroletRating() {
 
-    let [value,setValue]=useState(0)
+
+    let [value, setValue] = useState(0)
+
+    const StarrenderBold = (bold: number) => {
+        console.log(value)
+        setValue(bold)
+    }
+
     return (
         <div>
-            <Star selected={value>=1}/><button onClick={()=>setValue(1)}>1</button>
-            <Star selected={value>=2}/><button onClick={()=>setValue(2)}>2</button>
-            <Star selected={value>=3}/><button onClick={()=>setValue(3)}>3</button>
-            <Star selected={value>=4}/><button onClick={()=>setValue(4)}>4</button>
-            <Star selected={value>=5}/><button onClick={()=>setValue(5)}>5</button>
+            <Star number={1} selected={value >= 1} StarrenderBold={StarrenderBold}/>
+            <Star number={2} selected={value >= 2} StarrenderBold={StarrenderBold}/>
+            <Star number={3} selected={value >= 3} StarrenderBold={StarrenderBold}/>
+            <Star number={4} selected={value >= 4} StarrenderBold={StarrenderBold}/>
+            <Star number={5} selected={value >= 5} StarrenderBold={StarrenderBold}/>
+
+
+            {/*<Star selected={value} StarrenderBold={StarrenderBold}/>*/}
+            {/*<Star selected={value} StarrenderBold={StarrenderBold}/>*/}
+            {/*<Star selected={value} StarrenderBold={StarrenderBold}/>*/}
+            {/*<Star selected={value} StarrenderBold={StarrenderBold}/>*/}
+            {/*<Star selected={value} StarrenderBold={StarrenderBold}/>*/}
         </div>
     )
 }
 
 
-//       if (props.value === 1) {
-//         return <div>
-//             <Star selected={true}/>
-//             <Star selected={false}/>
-//             <Star selected={false}/>
-//             <Star selected={false}/>
-//             <Star selected={false}/>
-//         </div>
-//     } else if (props.value === 2) {
-//         return <div>
-//             <Star selected={true}/>
-//             <Star selected={true}/>
-//             <Star selected={false}/>
-//             <Star selected={false}/>
-//             <Star selected={false}/>
-//         </div>
-//     } else if (props.value === 3) {
-//         return <div>
-//             <Star selected={true}/>
-//             <Star selected={true}/>
-//             <Star selected={true}/>
-//             <Star selected={false}/>
-//             <Star selected={false}/>
-//         </div>
-//     } else if (props.value === 4) {
-//         return <div>
-//             <Star selected={true}/>
-//             <Star selected={true}/>
-//             <Star selected={true}/>
-//             <Star selected={true}/>
-//             <Star selected={false}/>
-//         </div>
-//     } else if (props.value === 5) {
-//         return <div>
-//             <Star selected={true}/>
-//             <Star selected={true}/>
-//             <Star selected={true}/>
-//             <Star selected={true}/>
-//             <Star selected={true}/>
-//         </div>
-//     }
-//
-//         return <div>
-//             <Star selected={false}/>
-//             <Star selected={false}/>
-//             <Star selected={false}/>
-//             <Star selected={false}/>
-//             <Star selected={false}/>
-//         </div>
-// }
 
-type StarProps={
-    selected:boolean
+
+type StarProps = {
+    number: number
+    selected: boolean
+    StarrenderBold: (bold: number) => void
 }
 
 function Star(props: StarProps) {
-    return props.selected === true ? <span><b>star </b></span> : <span>star </span>
+    return props.selected === true
+        ? <span onClick={() => {
+            props.StarrenderBold(props.number)
+        }}><b>star </b></span>
+        : <span onClick={() => {
+            props.StarrenderBold(props.number)
+        }}>star </span>
 }
 
+
+// props.selected === true
+//     ? <span ><b>star </b></span>
+//     : <span onClick={()=>props.StarrenderBold(false)}>star </span>
+// }
