@@ -27,10 +27,13 @@ type AccordionType = {
 export function UncontoletAccordionType(props: AccordionType) {
 
 
-    let [collaps, setcollaps] = useState(false)
+    let [collaps, setcollaps] = useState(true)
 
+    const AccordionTitleRender=(name:boolean)=>{
+        setcollaps(!collaps)
+    }
     return <div>
-        <AccordionTitle titleValue={props.title}/>
+        <AccordionTitle titleValue={props.title} AccordionTitleRender={AccordionTitleRender}/>
         <button onClick={() => setcollaps(!collaps)}>Toggle</button>
         {!collaps && <AccordionBody/>}
     </div>
@@ -38,11 +41,14 @@ export function UncontoletAccordionType(props: AccordionType) {
 
 type AccordionTitleType = {
     titleValue: string
+    AccordionTitleRender:(name:boolean)=>void
 }
 
+
+
 function AccordionTitle(props: AccordionTitleType) {
-    console.log('AccordionTitle render')
-    return <h3>{props.titleValue}</h3>
+    return <h3 onClick={()=>{ props.AccordionTitleRender(false)}}> {props.titleValue}</h3>
+
 }
 
 function AccordionBody() {
