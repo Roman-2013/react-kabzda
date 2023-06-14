@@ -1,58 +1,31 @@
 import React, {useState} from 'react';
 
-// type RatingProps={
-//     value:0|1|2|3|4|5
-// }
 
 export function UncontroletRating() {
 
 
     let [value, setValue] = useState(0)
 
-    const StarrenderBold = (bold: number) => {
-        console.log(value)
-        setValue(bold)
-    }
-
     return (
         <div>
-            <Star number={1} selected={value >= 1} StarrenderBold={StarrenderBold}/>
-            <Star number={2} selected={value >= 2} StarrenderBold={StarrenderBold}/>
-            <Star number={3} selected={value >= 3} StarrenderBold={StarrenderBold}/>
-            <Star number={4} selected={value >= 4} StarrenderBold={StarrenderBold}/>
-            <Star number={5} selected={value >= 5} StarrenderBold={StarrenderBold}/>
+            <Star  selected={value >= 1} setValue={()=>setValue(1)}/>
+            <Star  selected={value >= 2} setValue={()=>setValue(2)}/>
+            <Star  selected={value >= 3} setValue={()=>setValue(3)}/>
+            <Star  selected={value >= 4} setValue={()=>setValue(4)}/>
+            <Star  selected={value >= 5} setValue={()=>setValue(5)}/>
 
-
-            {/*<Star selected={value} StarrenderBold={StarrenderBold}/>*/}
-            {/*<Star selected={value} StarrenderBold={StarrenderBold}/>*/}
-            {/*<Star selected={value} StarrenderBold={StarrenderBold}/>*/}
-            {/*<Star selected={value} StarrenderBold={StarrenderBold}/>*/}
-            {/*<Star selected={value} StarrenderBold={StarrenderBold}/>*/}
         </div>
     )
 }
 
 
-
-
 type StarProps = {
-    number: number
+    setValue: () => void
     selected: boolean
-    StarrenderBold: (bold: number) => void
 }
 
 function Star(props: StarProps) {
-    return props.selected === true
-        ? <span onClick={() => {
-            props.StarrenderBold(props.number)
-        }}><b>star </b></span>
-        : <span onClick={() => {
-            props.StarrenderBold(props.number)
-        }}>star </span>
+
+    return <span onClick={() => props.setValue()}>{props.selected ? <b>star </b> : 'star '}</span>
 }
 
-
-// props.selected === true
-//     ? <span ><b>star </b></span>
-//     : <span onClick={()=>props.StarrenderBold(false)}>star </span>
-// }

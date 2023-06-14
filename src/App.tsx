@@ -1,37 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
-import {Accordion} from "./Components/Accordion/Accordion";
-import {Rating} from "./Components/Raiting/Raiting";
-import {OnOff} from "./Components/OnOff/OnOff";
+import {Accordion} from './Components/Accordion/Accordion';
+import {Raiting, Rating, RatingProps} from './Components/Raiting/Raiting';
+import {OnOff} from './Components/OnOff/OnOff';
 import {UncontoletAccordionType} from './Components/UncontroletAccordion/UncontoletAccordionType';
 import {UncontroletRating} from './Components/UncontroletRaiting/UncontroletRating';
+import {UncontroletOnOff} from './Components/UncontroletOnOff/UncontroletOnOff';
 
 
 const App = () => {
-    //debugger
+    let [raiting, setraiting] = useState<Raiting>(0)
+    let [acordion, setacordion] = useState<boolean>(true)
+    let [onOf, setonOf] = useState<boolean>(true)
     return (
         <div className={'App'}>
-           <OnOff on={false}/>
-           {/*<OnOff on={true}/>*/}
-           {/*<OnOff on={false}/>*/}
+            <OnOff on={false}/>
+            <UncontroletOnOff  setonOf={()=>setonOf(!onOf)} onOf={onOf}/>
 
 
+            <UncontoletAccordionType title={'Menu1'}/>
 
-            {/*<PageTitle title={"This is APP component"}/>*/}
-            {/*<PageTitle title={"Users friend"}/>*/}
-            {/*<div>Articl1</div>*/}
-            {/*<Rating value={3}/>*/}
-            <UncontoletAccordionType title={"Menu1"}/>
-            {/*<Accordion title={"Menu1"} collaps={true}/>*/}
-            <Accordion title={"Menu2"} collaps={false}/>
+            <Accordion title={'Menu2'} collaps={setacordion}  acordion={acordion}/>
+
             <UncontroletRating/>
             Articl 2
-
-            <Rating value={1}/>
-            <Rating value={2}/>
-            <Rating value={3}/>
-            <Rating value={4}/>
-            <Rating value={5}/>
+            <Rating value={raiting} onClick={setraiting}/>
         </div>
     );
 }
