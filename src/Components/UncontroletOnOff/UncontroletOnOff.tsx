@@ -1,14 +1,16 @@
 import {useState} from 'react';
 
 type PropsType = {
-
-    setonOf: () => void
-    onOf: boolean
+    setonOf?: (n: boolean) => void
 }
 
 
 export const UncontroletOnOff = (props: PropsType) => {
-let{onOf,setonOf}=props
+
+    let [on, seton] = useState(false)
+
+    console.log('rendet OnOff');
+    console.log('on ' + on);
 
     const onStyle = {
         width: '30px',
@@ -16,7 +18,7 @@ let{onOf,setonOf}=props
         border: 'solid 1px black',
         display: 'inline-block',
         padding: '2px',
-        backgroundColor: onOf ? 'green' : 'white'
+        backgroundColor: on ? 'green' : 'white'
     }
     const ofStyle = {
         width: '30px',
@@ -25,7 +27,7 @@ let{onOf,setonOf}=props
         display: 'inline-block',
         marginLeft: '2px',
         padding: '2px',
-        backgroundColor: onOf ? 'white' : 'red'
+        backgroundColor: on ? 'white' : 'red'
     }
     const indicatirStyle = {
         width: '10px',
@@ -34,14 +36,21 @@ let{onOf,setonOf}=props
         border: '1px solid black',
         display: 'inline-block',
         marginLeft: '5px',
-        backgroundColor: onOf ? 'green' : 'red'
+        backgroundColor: on ? 'green' : 'red'
+    }
+
+    const onClickHandler = () => {
+        seton(on = true)
+    }
+    const onClickHandler2 = () => {
+        seton(on = false)
     }
 
 
     return (
         <div>
-            <div style={onStyle} onClick={() => setonOf()}>On</div>
-            <div style={ofStyle} onClick={() => setonOf()}>Of</div>
+            <div style={onStyle} onClick={onClickHandler}>On</div>
+            <div style={ofStyle} onClick={onClickHandler2}>Of</div>
             <div style={indicatirStyle}></div>
         </div>
     )

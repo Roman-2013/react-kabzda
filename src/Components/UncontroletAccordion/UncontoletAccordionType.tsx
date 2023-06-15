@@ -9,9 +9,7 @@ export function UncontoletAccordionType(props: AccordionType) {
 
     let [collaps, setcollaps] = useState(true)
 
-    // const AccordionTitleRender = (name: boolean) => {
-    //     setcollaps(!collaps)
-    // }
+
     return <div>
         <AccordionTitle titleValue={props.title} setcollaps={setcollaps} collaps={collaps}/>
         {!collaps && <AccordionBody/>}

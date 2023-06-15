@@ -1,16 +1,14 @@
-import {useState} from 'react';
+
 
 type PropsType = {
-    on: boolean
+
+    setonOf: () => void
+    onOf: boolean
 }
 
 
 export const OnOff = (props: PropsType) => {
-
-    let [on,seton]=useState(false)
-
-    console.log("rendet OnOff");
-    console.log("on "+ on);
+let{onOf,setonOf}=props
 
     const onStyle = {
         width: '30px',
@@ -18,7 +16,7 @@ export const OnOff = (props: PropsType) => {
         border: 'solid 1px black',
         display: 'inline-block',
         padding: '2px',
-        backgroundColor: on ? 'green' : 'white'
+        backgroundColor: onOf ? 'green' : 'white'
     }
     const ofStyle = {
         width: '30px',
@@ -27,7 +25,7 @@ export const OnOff = (props: PropsType) => {
         display: 'inline-block',
         marginLeft: '2px',
         padding: '2px',
-        backgroundColor: on ? 'white' : 'red'
+        backgroundColor: onOf ? 'white' : 'red'
     }
     const indicatirStyle = {
         width: '10px',
@@ -36,15 +34,14 @@ export const OnOff = (props: PropsType) => {
         border: '1px solid black',
         display: 'inline-block',
         marginLeft: '5px',
-        backgroundColor: on ? 'green' : 'red'
+        backgroundColor: onOf ? 'green' : 'red'
     }
-
 
 
     return (
         <div>
-            <div  style={onStyle} onClick={() => seton(on=true)} >On</div>
-            <div style={ofStyle} onClick={() => seton(on=false)}>Of</div>
+            <div style={onStyle} onClick={setonOf}>On</div>
+            <div style={ofStyle} onClick={setonOf}>Of</div>
             <div style={indicatirStyle}></div>
         </div>
     )
