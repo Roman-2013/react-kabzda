@@ -1,33 +1,49 @@
-import React, {useState} from 'react';
+import React, {useReducer, useState} from 'react';
+import {reducer} from './reduser';
 
 type AccordionType = {
     title: string,
 }
 
+// type ActionType = {
+//     type: string
+// }
+//
+// const reduser = (state: boolean, action: ActionType) => {
+//     switch (action.type){
+//         case 'TOOGLE-COLAPSED':
+//             return !state
+//         default:
+//             return state
+//     }
+
+
 export function UncontoletAccordionType(props: AccordionType) {
 
 
-    let [collaps, setcollaps] = useState(true)
+    //let [collaps, setcollaps] = useState(true)
+    let [state, dispatch] = useReducer(reducer, {collapsed:false})
 
 
     return <div>
-        <AccordionTitle titleValue={props.title} setcollaps={setcollaps} collaps={collaps}/>
-        {!collaps && <AccordionBody/>}
+        {/*<AccordionTitle titleValue={props.title} setcollaps={setcollaps} collaps={collaps}/>*/}
+        <AccordionTitle titleValue={props.title} onClick={() => {
+            dispatch({type: 'TOOGLE-COLAPSED'})
+        }}/>
+        {!state.collapsed && <AccordionBody/>}
     </div>
 }
 
 
 type AccordionTitleType = {
     titleValue: string
-    setcollaps: ( collaps:boolean) => void
-    collaps:boolean
+    onClick: () => void
 }
 
 function AccordionTitle(props: AccordionTitleType) {
-    return <h3 onClick={() => props.setcollaps(!props.collaps)}> {props.titleValue}</h3>
+    return <h3 onClick={() =>props.onClick()}> {props.titleValue}</h3>
 
 }
-
 
 
 function AccordionBody() {

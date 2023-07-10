@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {memo, useRef, useState} from 'react';
 import './App.css';
 import {Accordion} from './Components/Accordion/Accordion';
 import {Raiting, Rating, RatingProps} from './Components/Raiting/Raiting';
@@ -33,7 +33,19 @@ const App = () => {
     const callback = () => {
         console.log('click')
     }
+
+
+    const [counter, setCounter] = useState(0)
+    const [users, setUsers] = useState(['dima', 'valera', 'vlad', 'roma'])
+    const addUserHAndler =()=>{
+        setUsers([...users,'sveta'])
+    }
     return (<div className={'App'}>
+
+<button onClick={()=>setCounter(counter+1)}>+</button>
+<button onClick={addUserHAndler}>addUser</button>
+            <Count count={counter}/>
+            <Users users={users}/>
 
             {/*<div>*/}
             {/*    <input ref={inputRef}/><button onClick={save}>save</button> -actual value: {value1}*/}
@@ -69,27 +81,23 @@ const App = () => {
             {/* */}
             {/*<UncontoletAccordionType title={'Menu1'}/>*/}
 
-            <Selects value={parentValue4}
-                     onChange={setparentValue4}
-                     items={[{title: 'roma', value: '1'},
-                         {title: 'dima', value: '2'},
-                         {title: 'sacha', value: '3'},
-                         {title: 'victor', value: '4'}
-                     ]}/>
+            {/*<Selects value={parentValue4}*/}
+            {/*         onChange={setparentValue4}*/}
+            {/*         items={[{title: 'roma', value: '1'},*/}
+            {/*             {title: 'dima', value: '2'},*/}
+            {/*             {title: 'sacha', value: '3'},*/}
+            {/*             {title: 'victor', value: '4'}*/}
+            {/*         ]}/>*/}
 
 
-            <Selects
+            {/*<Selects*/}
 
-                     onChange={setparentValue4}
-                     items={[{title: 'roma', value: '1'},
-                         {title: 'dima', value: '2'},
-                         {title: 'sacha', value: '3'},
-                         {title: 'victor', value: '4'}
-                     ]}/>
-
-
-
-
+            {/*         onChange={setparentValue4}*/}
+            {/*         items={[{title: 'roma', value: '1'},*/}
+            {/*             {title: 'dima', value: '2'},*/}
+            {/*             {title: 'sacha', value: '3'},*/}
+            {/*             {title: 'victor', value: '4'}*/}
+            {/*         ]}/>*/}
             {/*<Accordion onClick={(id) => {*/}
             {/*    alert(id)*/}
             {/*}}*/}
@@ -122,3 +130,15 @@ const PageTitle = (props: PageTitlePropsType) => {
     return <h1>{props.title}</h1>
 }
 export default App;
+
+
+const CounterSecret = (props: { count: number }) => {
+    console.log('Count')
+    return <div>{props.count}</div>
+}
+const UsersSecret = (props: { users: Array<string> }) => {
+    console.log('Users')
+    return <div>{props.users.map((u, index) => <div key={index}>{u}</div>)}</div>
+}
+const Users=memo(UsersSecret)
+const Count=memo(CounterSecret)
