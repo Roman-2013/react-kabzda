@@ -32,3 +32,23 @@ export const UseEffect = () => {
     );
 };
 
+export const UseEffectSetTimeout = () => {
+    const[date,setDate]=useState(new Date())
+
+    console.log('UseEffect Komponnent')
+
+    useEffect(()=>{
+
+
+        setInterval(()=>{
+                setDate(()=>new Date())
+        },1000)
+    },[])
+
+    return (
+        <div>
+            Day:{date.getDate()} Hours:{date.getHours()} Minutes:{date.getMinutes()} Seconds:{date.getSeconds()}
+        </div>
+    );
+};
+
