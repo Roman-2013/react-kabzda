@@ -38,16 +38,32 @@ export const UseEffectSetTimeout = () => {
     console.log('UseEffect Komponnent')
 
     useEffect(()=>{
-
-
         setInterval(()=>{
-                setDate(()=>new Date())
+                setDate(new Date())
         },1000)
     },[])
 
+
+
+
+    const[counter,setCounter]=useState(1)
+    console.log("counter")
+
+    useEffect(()=>{
+
+        setInterval(()=>{
+            setCounter((state)=>state+1)
+        },1000)
+    },[])
+
+
+
+
     return (
         <div>
-            Day:{date.getDate()} Hours:{date.getHours()} Minutes:{date.getMinutes()} Seconds:{date.getSeconds()}
+            {counter}
+            <hr/>
+             {date.getHours()}:{date.getMinutes()}:{date.getSeconds()}
         </div>
     );
 };

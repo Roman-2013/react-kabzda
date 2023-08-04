@@ -3,6 +3,7 @@ import './App.css';
 import {UseMemoUseCallbackLesson} from './fakeStories/useMemo+UseCallbackLesson';
 import {UseState} from './fakeStories/UseState';
 import {UseEffect, UseEffectSetTimeout} from './fakeStories/UseEffect';
+import {Clock} from './Components/Clock/Clock';
 
 
 
@@ -12,7 +13,7 @@ export const App = () => {
 
     return (
         <div className={'App'}>
-          <UseEffectSetTimeout/>
+          <Clock/>
         </div>
     )
         ;
