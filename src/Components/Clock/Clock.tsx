@@ -1,5 +1,5 @@
 import React, {ChangeEvent, ChangeEventHandler, ReactEventHandler, useEffect, useState} from 'react';
-import style from './Clock.module.css'
+
 
 type PropsType = {}
 
