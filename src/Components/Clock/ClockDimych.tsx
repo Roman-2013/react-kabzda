@@ -2,39 +2,41 @@ import React, {FC, useEffect, useState} from 'react';
 import {Clock2} from './Clock';
 
 export type PropsType = {
-    mode?:'analog'| 'digital'
+    mode?: 'analog' | 'digital'
 }
 
-export const ClockDimych: FC <PropsType> = (props) => {
-    const [date,setDate]=useState(new Date())
+export const ClockDimych: FC<PropsType> = (props) => {
+    const [date, setDate] = useState(new Date())
 
-    useEffect(()=>{
-       const intervalID= setInterval(()=>{
-           console.log('TICK')
+    useEffect(() => {
+        const intervalID = setInterval(() => {
+            console.log('TICK')
             setDate(new Date())
-        },1000)
-        return ()=>{
+        }, 1000)
+        return () => {
             clearInterval(intervalID)
         }
-    },[])
+    }, [])
 
-     const get2string=(number:number)=>number<10?'0'+number:number
 
     return <div>
-        {props.mode ==='digital'?
-            <DigitalClock date={date} get2string={get2string}/>
-            : <AnalogClock/>
+        {props.mode === 'digital' ?
+            <DigitalClock date={date}/>
+            : <AnalogClock date={date}/>
         }
     </div>
 }
 
-type DigitalClockType={
-    date:Date
-    get2string:(number:number)=>string|number
+
+type DigitalClockType = {
+    date: Date
 }
 
-export const DigitalClock=(props:DigitalClockType)=>{
-    let{date,get2string}=props
+
+export const DigitalClock = (props: DigitalClockType) => {
+    let {date} = props
+    const get2string = (number: number) => number < 10 ? '0' + number : number
+
     return (
         <>
             <span>{get2string(date.getHours())}</span>
@@ -44,17 +46,20 @@ export const DigitalClock=(props:DigitalClockType)=>{
             <span>{get2string(date.getSeconds())}</span></>
     )
 }
-export const AnalogClock = () => {
+
+
+export const AnalogClock = (props: DigitalClockType) => {
+    let {date} = props
+
     function clock() {
         const deg = 6;
         const hr: HTMLElement | null = document.querySelector('#hour-hand');
         const mn: HTMLElement | null = document.querySelector('#minute-hand');
         const sc: HTMLElement | null = document.querySelector('#second-hand');
 
-        let day = new Date();
-        let hh = day.getHours() * 30;
-        let mm = day.getMinutes() * deg;
-        let ss = day.getSeconds() * deg;
+        let hh = date.getHours() * 30;
+        let mm = date.getMinutes() * deg;
+        let ss = date.getSeconds() * deg;
 
 
         if (hr !== null && mn !== null && sc !== null) {
