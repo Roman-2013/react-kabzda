@@ -1,8 +1,11 @@
-import {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
+import {Clock2} from './Clock';
 
-export type PropsType = {}
+export type PropsType = {
+    mode?:'analog'| 'digital'
+}
 
-export const ClockDimych: React.FC<PropsType> = (props: any) => {
+export const ClockDimych: FC <PropsType> = (props) => {
     const [date,setDate]=useState(new Date())
 
     useEffect(()=>{
@@ -15,13 +18,98 @@ export const ClockDimych: React.FC<PropsType> = (props: any) => {
         }
     },[])
 
-    const get2string=(number:number)=>number<10?'0'+number:number
+     const get2string=(number:number)=>number<10?'0'+number:number
 
     return <div>
-        <span>{get2string(date.getHours())}</span>
-        :
-        <span>{get2string(date.getMinutes())}</span>
-        :
-        <span>{get2string(date.getSeconds())}</span>
+        {props.mode ==='digital'?
+            <DigitalClock date={date} get2string={get2string}/>
+            : <AnalogClock/>
+        }
     </div>
 }
+
+type DigitalClockType={
+    date:Date
+    get2string:(number:number)=>string|number
+}
+
+export const DigitalClock=(props:DigitalClockType)=>{
+    let{date,get2string}=props
+    return (
+        <>
+            <span>{get2string(date.getHours())}</span>
+            :
+            <span>{get2string(date.getMinutes())}</span>
+            :
+            <span>{get2string(date.getSeconds())}</span></>
+    )
+}
+export const AnalogClock = () => {
+    function clock() {
+        const deg = 6;
+        const hr: HTMLElement | null = document.querySelector('#hour-hand');
+        const mn: HTMLElement | null = document.querySelector('#minute-hand');
+        const sc: HTMLElement | null = document.querySelector('#second-hand');
+
+        let day = new Date();
+        let hh = day.getHours() * 30;
+        let mm = day.getMinutes() * deg;
+        let ss = day.getSeconds() * deg;
+
+
+        if (hr !== null && mn !== null && sc !== null) {
+            hr.style.transform = `rotateZ(${hh + mm / 12}deg)`;
+            mn.style.transform = `rotateZ(${mm}deg)`;
+            sc.style.transform = `rotateZ(${ss}deg)`;
+        }
+    }
+
+    setInterval(clock, 1000);
+
+    return (
+        <>
+            <div
+                style={{
+                    width: '200px',
+                    height: '200px',
+                    border: '2px solid black',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    position: 'relative'
+                }}
+            >
+                <div id="hour-hand"
+                     style={{
+                         position: 'absolute',
+                         width: '4px',
+                         height: '40px',
+                         backgroundColor: 'black',
+                         transformOrigin: 'bottom center'
+                     }}
+                >
+                </div>
+                <div id="minute-hand"
+                     style={{
+                         position: 'absolute',
+                         width: '2px', height: '60px',
+                         backgroundColor: 'black',
+                         transformOrigin: 'bottom'
+                     }}
+                >
+                </div>
+                <div id="second-hand"
+                     style={{
+                         position: 'absolute',
+                         width: '2px',
+                         height: '60px',
+                         backgroundColor: 'black',
+                         transformOrigin: 'bottom'
+                     }}
+                >
+                </div>
+            </div>
+        </>
+    );
+};

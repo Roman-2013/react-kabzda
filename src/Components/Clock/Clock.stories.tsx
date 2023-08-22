@@ -28,7 +28,18 @@ type Story = StoryObj<typeof ClockDimych>;
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
 //Есть два способо создания историй, вот так или через render
 
-export const ClockDimychStory:Story={}
+export const ClockDigitalDimychStory:Story={
+   args:{
+       mode:'analog'
+   }
+}
+
+
+export const ClockAnalogDimychStory:Story={
+    args:{
+        mode:'digital'
+    }
+}
 
 
 

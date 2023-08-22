@@ -51,7 +51,7 @@ export const Clock: React.FC<PropsType> = (props) => {
 //--------------------------------------------------------------------------------
 
 
-const Clock2 = () => {
+export const Clock2 = () => {
     function clock() {
         const deg = 6;
         const hr: HTMLElement | null = document.querySelector('#hour-hand');
